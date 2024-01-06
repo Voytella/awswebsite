@@ -107,4 +107,14 @@ Create a webpage that mimics an FTP server.
   
 # Customizing the URL
 
-* 
+* We need to use AWS Route 53 to register a domain. Let's give it a shot!
+
+* I bought "ryanscoolimages.link" for a year for $5 
+
+* Success! I followed this tutorial to link the domain to my S3 bucket: https://docs.aws.amazon.com/AmazonS3/latest/userguide/website-hosting-custom-domain-walkthrough.html
+
+# Known Bugs / Limitations
+
+* Spaces in folder names breaks things.
+* Only images are assumed to exist within the bucket.
+* Only images will be displayed
