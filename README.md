@@ -62,3 +62,49 @@ Create a webpage that mimics an FTP server.
   
 * Success! Now I need to figure out how to traverse it nicely, then we can put
   in the HTML decorations.
+
+* When parsing the data structure, there are three different types of elements
+  in the list we need to handle:
+  1. String: Just straight print it out.
+  2. Dictionary: This means a folder has been encountered. The elements in the
+     folder will need to be wrapped in HTML, so we need a special function to do
+     this wrapping for us. A separate function will be called to handle the
+     wrapping for each key in the dictionary. The values will be processed with
+     the regular data structure processing function.
+   3. List: Recursively call the data structure processing function, feeding it
+      the encountered list.
+      
+* I realized since we're just printing HTML code, we don't have to go through
+  the hassle of actually flattening out everything on the back end. Yay
+  shortcuts! I've got everything worked out. Now let's add the HTML decorations
+  and test it out!
+  
+* Looks like we're looking for the `<details>` HTML element for the thing I had
+  in mind.
+  
+* Cool! We've got something! Now let's throw it into AWS to see if it works.
+
+* Got it! It writes the HTML to the logs! Now we just need to figure out how to
+  write that output to a file and send it over to S3. To do that, it looks like
+  we'll need to make a file object and write our HTML to it.
+  
+* I accidentally tried to write a file to the filesystem. Can we do a thing
+  where we just make a giant string and write that out?
+
+* I messed up. I forgot the paths to the image sources needed to be
+  absolute. RIP. Let's see if we can turn this around.
+
+* Alright that crisis has been averted. Now we're running into issues getting
+  the HTML file to render properly. Let's add little-by-little things to a test
+  `index.html` file to see where things break down.
+  
+* I tried manually uploading an HTML file with the same kind of code, and it
+  worked just fine. I think there's something crazy going on with how I'm
+  uploading the generated HTML file into S3. Let's see what's up with all that.
+  
+* Success! We just needed to set the "ContentType" in the "put_object" call to
+  "text/html". Nice! Now let's dabble in customizing the URL.
+  
+# Customizing the URL
+
+* 
