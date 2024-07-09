@@ -113,6 +113,17 @@ Create a webpage that mimics an FTP server.
 
 * Success! I followed this tutorial to link the domain to my S3 bucket: https://docs.aws.amazon.com/AmazonS3/latest/userguide/website-hosting-custom-domain-walkthrough.html
 
+# Creating Template
+
+* We can use AWS CloudFormation to create deployable templates of AWS
+  configurations. I need to create a CloudFormation template that configures S3,
+  Lambda, and Route 53 to deploy a webpage.
+* In the template, the user would be presented with a prompt to choose and
+  purchase a domain. The template will then take that single piece of info and
+  generate the rest of the environment with the other services.
+* First thing I need to do is figure out how AWS CloudFormation works, lol!
+  Let's see about starting with a basic tutorial.
+
 # Known Bugs / Limitations
 
 * Spaces in folder names breaks things.
