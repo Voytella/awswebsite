@@ -68,4 +68,8 @@ image-hosting website on AWS with only basic configuration information.
   authentication at all if I can get all the set up into some easy-to-copy
   commands! Hmmmmm, I think this might be our cheapest option. I'll clone this
   repo into the CloudShell and try it out there.
-* 
+* When it gets to the Python script, it fails complaining that the bucket
+  doesn't exist. Isn't the point of the CloudFormation stuff to automatically
+  create everything? It shows that the stack was created, but it's in
+  "ROLLBACK_COMPLETE" status which is red. I guess we've gotta work on the
+  template. Progress, though! I like the CloudShell route!
