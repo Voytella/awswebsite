@@ -8,14 +8,21 @@ lambda_bucket_name='autodeploytest.link-lambda'
 stack_name="s3-static-website"
 lambda_stack_name="lambda-function"
 
-aws cloudformation create-stack --region ${region} \
---stack-name ${stack_name} --template-body file://s3-static-website.yaml \
---parameters ParameterKey=BucketName,ParameterValue=${bucket_name} \
-ParameterKey=HostedZoneName,ParameterValue=${hosted_zone_name}
+#aws cloudformation create-stack --region ${region} \
+#--stack-name ${stack_name} --template-body file://s3-static-website.yaml \
+#--parameters ParameterKey=BucketName,ParameterValue=${bucket_name} \
+#ParameterKey=HostedZoneName,ParameterValue=${hosted_zone_name}
 
 # create a stack
 # Arg 1: name of stack
+# Arg 2: name of bucket
 create_stack() {
+
+    aws cloudformation create-stack --region ${region} \
+    --stack-name "$1" --template-body file://"$1".yaml \
+    --parameters ParameterKey=BucketName,ParameterValue="$2" \
+    ParameterKey=HostedZoneName,ParameterValue=${hosted_zone_name}
+
     stack_status=""
     while [[ $stack_status != '"CREATE_COMPLETE"' ]];
     do
@@ -27,7 +34,7 @@ create_stack() {
 }
 
 # create initial stack
-create_stack "$stack_name"
+create_stack "$stack_name" "$bucket_name"
 
 #stack_status=""
 #while [[ $stack_status != '"CREATE_COMPLETE"' ]];
@@ -49,6 +56,6 @@ echo "initial stack created. Uploading files now"
 echo "files uploaded"
 
 # create lambda function
-create_stack "$lambda_stack_name"
+create_stack "$lambda_stack_name" "$lambda_bucket_name"
 
 echo "lambda stack created"
