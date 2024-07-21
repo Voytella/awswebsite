@@ -8,21 +8,12 @@ lambda_bucket_name='autodeploytest.link-lambda'
 stack_name="s3-static-website"
 lambda_stack_name="lambda-function"
 
-#aws cloudformation create-stack --region ${region} \
-#--stack-name ${stack_name} --template-body file://s3-static-website.yaml \
-#--parameters ParameterKey=BucketName,ParameterValue=${bucket_name} \
-#ParameterKey=HostedZoneName,ParameterValue=${hosted_zone_name}
 
-# create a stack
+# ----------BEGIN FUNCTIONS----------
+
+# watch the progress of stack creation
 # Arg 1: name of stack
-# Arg 2: name of bucket
-create_stack() {
-
-    aws cloudformation create-stack --region ${region} \
-    --stack-name "$1" --template-body file://"$1".yaml \
-    --parameters ParameterKey=BucketName,ParameterValue="$2" \
-    ParameterKey=HostedZoneName,ParameterValue=${hosted_zone_name}
-
+watch_stack_creation() {
     stack_status=""
     while [[ $stack_status != '"CREATE_COMPLETE"' ]];
     do
@@ -33,8 +24,16 @@ create_stack() {
     done
 }
 
-# create initial stack
-create_stack "$stack_name" "$bucket_name"
+# -----------END FUNCTIONS-----------
+
+# create the stack for the website
+aws cloudformation create-stack --region ${region} \
+--stack-name ${stack_name} --template-body file://s3-static-website.yaml \
+--parameters ParameterKey=BucketName,ParameterValue=${bucket_name} \
+ParameterKey=HostedZoneName,ParameterValue=${hosted_zone_name}
+
+# watch initial stack
+watch_stack_creation "$stack_name"
 
 #stack_status=""
 #while [[ $stack_status != '"CREATE_COMPLETE"' ]];
@@ -55,7 +54,12 @@ echo "initial stack created. Uploading files now"
 
 echo "files uploaded"
 
-# create lambda function
-create_stack "$lambda_stack_name" "$lambda_bucket_name"
+# create lambda stack
+aws cloudformation create-stack --region ${region} \
+--stack-name ${lambda_stack_name} --template-body file://lambda-function.yaml \
+--parameters ParameterKey=BucketName,ParameterValue=${lambda_bucket_name} \
+--capabilities CAPABILITY_NAMED_IAM
+
+watch_stack_creation "$lambda_stack_name"
 
 echo "lambda stack created"

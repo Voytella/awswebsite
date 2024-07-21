@@ -112,3 +112,8 @@ to do.
 After much tinkering, I was ready to test again! As expected, got some errors.
 The first complaint is that there's an "invalid template resource property",
 "Policies". Let's tear up the template and see about tidying that up first.
+
+LOL, indentation error. Let's try again.
+
+New error! It's complaining that it needs the "[CAPABILITY_NAMED_IAM]", whatever
+that is. Let's find out!
