@@ -12,7 +12,7 @@ Parameters:
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
         S3Bucket: !Ref LambdaCodeBucket
-        S3Key: 'lambda-code/updateWebsite.zip' # will likely need to customize this later
+        S3Key: 'updateWebsiteCode.zip'
       Runtime: 'python3.10'
       MemorySize: 128
       Timeout: 3
