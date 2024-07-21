@@ -45,4 +45,6 @@ if __name__ == "__main__":
                 ExtraArgs = {'ContentType': 'image/png'}
             elif filename.endswith('jpeg') or filename.endswith('jpg'):
                 ExtraArgs = {'ContentType': 'image/jpeg'}
+            elif filename.endswith('zip'):
+                ExtraArgs = {'ContentType': 'application/zip'}
             upload_file(path, bucket, filename, ExtraArgs=ExtraArgs)

@@ -6,7 +6,7 @@ import os.path
 from pathlib import PurePath
 
 # S3 bucket of interest
-BUCKET = "autodeploytest.link"
+BUCKET = "www.autodeploytest.link"
 
 # hard-coded name of root directory in S3 bucket
 ROOT_DIR = "data/"
