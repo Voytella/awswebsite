@@ -70,7 +70,7 @@ Resources:
   LambdaCodeBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: 'autodeploytest.link-lambda'
+      BucketName: 'www.autodeploytest.link-lambda'
 
 Outputs:
   WebsiteURL:
