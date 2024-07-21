@@ -2,9 +2,9 @@
 region='us-east-1'
 src_dir="./Website"
 lambda_src_dir="./Lambda"
-bucket_name='autodeploytest.link'
+bucket_name='www.autodeploytest.link'
 hosted_zone_name="autodeploytest.link"
-lambda_bucket_name='autodeploytest.link-lambda'
+lambda_bucket_name='www.autodeploytest.link-lambda'
 stack_name="s3-static-website"
 lambda_stack_name="lambda-function"
 

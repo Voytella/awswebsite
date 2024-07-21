@@ -4,8 +4,8 @@ Parameters:
   # The bucket name must be the same as the CNAME
   BucketName:
     Type: String
-    #Default: www.autodeploytest.link
-    Default: autodeploytest.link
+    Default: www.autodeploytest.link
+    #Default: autodeploytest.link
   HostedZoneName:
     Type: String
     Default: autodeploytest.link
