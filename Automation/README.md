@@ -108,3 +108,7 @@ to be told where the execution code is, and the execution code needs to be
 uploaded. I'll need to do everything except make the Lambda function, push up
 all the files, then create the Lambda function. Not a big deal, just something
 to do.
+
+After much tinkering, I was ready to test again! As expected, got some errors.
+The first complaint is that there's an "invalid template resource property",
+"Policies". Let's tear up the template and see about tidying that up first.
