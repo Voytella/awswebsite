@@ -4,11 +4,14 @@ Parameters:
   # The bucket name must be the same as the CNAME
   BucketName:
     Type: String
-    Default: www.autodeploytest.link
+    #Default: www.autodeploytest.link
+    Default: autodeploytest.link
   HostedZoneName:
     Type: String
     Default: autodeploytest.link
 Resources:
+
+  # The S3 bucket where the website files will be stored.
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -26,6 +29,8 @@ Resources:
     # don't delete bucket when deleting the stack
     DeletionPolicy: Retain
     UpdateReplacePolicy: Retain
+
+  # Permit the website to be publicly accessible.
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -43,6 +48,8 @@ Resources:
               - - 'arn:aws:s3:::'
                 - !Ref S3Bucket
                 - /*
+
+  # Allow the website to be publicly reached on the internet.
   DNS:
     Type: AWS::Route53::RecordSetGroup
     Properties:
@@ -58,6 +65,37 @@ Resources:
         TTL: 900
         ResourceRecords:
         - !Join ['', !Split ['http://', !GetAtt S3Bucket.WebsiteURL ]]
+
+  # S3 Bucket where the website updating code will live.
+  LambdaCodeBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: 'autodeploytest.link-lambdacode'
+
+  # AWS Role that will execute the website updating code.
+  LambdaExecutionRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: 'LambdaExecutionRole'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service: 'lambda.amazonaws.com'
+            Action: 'sts:AssumeRole'
+    Policies:
+      - PolicyName: 'LambdaExecutionPolicy'
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Action:
+                - 'logs:CreateLogGroup'
+                - 'logs:CreateLogStream'
+                - 'logs:PutLogEvents'
+              Resource: 'arn:aws:logs:*:*:*'
+
 Outputs:
   WebsiteURL:
     Value: !GetAtt
@@ -72,3 +110,4 @@ Outputs:
           - S3Bucket
           - DomainName
     Description: Name of S3 bucket to hold website content
+

@@ -96,3 +96,15 @@ Looks like the template does things an old way that don't work anymore I found a
 StackOverflow article on an appropriate replacement:
 https://stackoverflow.com/questions/76097031/aws-s3-bucket-cannot-have-acls-set-with-objectownerships-bucketownerenforced-s
 Let's see if that works!
+
+Success! We've deployed a test static website! Now let's try adding Lambda
+functions to the template.
+
+I have lots of questions. Let's start by creating a blank Lambda function in the
+template.
+
+Just realized I'll need to call CloudFormation twice. The Lambda function needs
+to be told where the execution code is, and the execution code needs to be
+uploaded. I'll need to do everything except make the Lambda function, push up
+all the files, then create the Lambda function. Not a big deal, just something
+to do.
