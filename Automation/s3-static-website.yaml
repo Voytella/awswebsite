@@ -72,30 +72,6 @@ Resources:
     Properties:
       BucketName: 'autodeploytest.link-lambda'
 
-  # AWS Role that will execute the website updating code.
-  LambdaExecutionRole:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      RoleName: 'LambdaExecutionRole'
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: 'Allow'
-            Principal:
-              Service: 'lambda.amazonaws.com'
-            Action: 'sts:AssumeRole'
-      Policies:
-        - PolicyName: 'LambdaExecutionPolicy'
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: 'Allow'
-                Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
-                Resource: 'arn:aws:logs:*:*:*'
-
 Outputs:
   WebsiteURL:
     Value: !GetAtt
