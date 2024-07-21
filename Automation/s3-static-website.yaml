@@ -70,7 +70,7 @@ Resources:
   LambdaCodeBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: 'autodeploytest.link-lambdacode'
+      BucketName: 'autodeploytest.link-lambda'
 
   # AWS Role that will execute the website updating code.
   LambdaExecutionRole:
