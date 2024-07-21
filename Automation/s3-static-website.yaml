@@ -14,7 +14,12 @@ Resources:
     Properties:
       # Bucket names must be globally unique
       BucketName: !Ref BucketName
-      AccessControl: PublicRead
+      #AccessControl: PublicRead
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html

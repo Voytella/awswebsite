@@ -87,3 +87,12 @@ template. Progress, though! I like the CloudShell route!
 "ROLLBACK_COMPLETE" means the template's bad; the resources described in the
 template couldn't be created for one reason or another. I guess let's take a
 close look at our template and compare it to the original from the Medium post.
+
+I took a look at the Events associated with the failing Stack to see what's
+going on. It says that "Bucket cannot have ACLs set with ObjectOwnership's
+BucketOwnerEnforced setting". Let's find out what that's all about!
+
+Looks like the template does things an old way that don't work anymore I found a
+StackOverflow article on an appropriate replacement:
+https://stackoverflow.com/questions/76097031/aws-s3-bucket-cannot-have-acls-set-with-objectownerships-bucketownerenforced-s
+Let's see if that works!
