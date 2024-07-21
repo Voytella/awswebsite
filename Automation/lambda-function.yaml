@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create a Lambda Function from already uploaded code.
+Parameters:
+
+  # AWS Lambda function that will use the Lambda execution role to execute the
+  # website updating code.
+  UpdateWebsiteLambda:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: 'UpdateWebsite'
+      Handler: 'lambda_function.lambda_handler'
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: !Ref LambdaCodeBucket
+        S3Key: 'lambda-code/updateWebsite.zip' # will likely need to customize this later
+      Runtime: 'python3.10'
+      MemorySize: 128
+      Timeout: 3
+
+Outputs:
+  UpdateWebsiteLambdaArn:
+    Value: !GetAtt UpdateWebsiteLambda.Arn
+    Description: "ARN of the Lambda Function"
