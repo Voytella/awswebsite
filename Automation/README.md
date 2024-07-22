@@ -121,3 +121,7 @@ that is. Let's find out!
 I forgot to remove the duplicated role from the other template file.
 
 The lambda template is failing validation. Let's work through this.
+
+I got it to where it's failing due to some capabilities thing. Not sure what
+that means, and it'll require some investigation. I'll call it for today and
+pick back up tomorrow!
