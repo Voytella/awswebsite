@@ -119,3 +119,5 @@ New error! It's complaining that it needs the "[CAPABILITY_NAMED_IAM]", whatever
 that is. Let's find out!
 
 I forgot to remove the duplicated role from the other template file.
+
+The lambda template is failing validation. Let's work through this.

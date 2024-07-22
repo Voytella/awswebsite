@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Create a Lambda Function from already uploaded code.
-Parameters:
+Resources:
 
 # AWS Role that will execute the website updating code.
   LambdaExecutionRole:
