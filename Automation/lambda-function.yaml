@@ -64,14 +64,14 @@ Resources:
   #          Action: 's3.GetObject'
   #          Resource: !ImportValue WebsiteBucketArn
 
-  # Add the S3 Event Notification to the Lambda Function
-  S3EventTrigger:
-    Type: 'AWS::Lambda::Permission'
-    Properties:
-      FunctionName: !GetAtt UpdateWebsiteLambda.Arn
-      Action: 'lambda:InvokeFunction'
-      Principal: 's3.amazonaws.com'
-      SourceArn: !ImportValue WebsiteBucketArn
+  ## Add the S3 Event Notification to the Lambda Function
+  #S3EventTrigger:
+  #  Type: 'AWS::Lambda::Permission'
+  #  Properties:
+  #    FunctionName: !GetAtt UpdateWebsiteLambda.Arn
+  #    Action: 'lambda:InvokeFunction'
+  #    Principal: 's3.amazonaws.com'
+  #    SourceArn: !ImportValue WebsiteBucketArn
 
   # Configure the S3 Event
   S3EventConfiguration:
