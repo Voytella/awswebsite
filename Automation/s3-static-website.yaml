@@ -27,8 +27,10 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
     # don't delete bucket when deleting the stack
-    DeletionPolicy: Retain
-    UpdateReplacePolicy: Retain
+    #DeletionPolicy: Retain
+    #UpdateReplacePolicy: Retain
+    # delete bucket when deleting the stack
+    DeletionPolicy: Delete
 
   # Permit the website to be publicly accessible.
   BucketPolicy:

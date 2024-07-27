@@ -125,3 +125,16 @@ The lambda template is failing validation. Let's work through this.
 I got it to where it's failing due to some capabilities thing. Not sure what
 that means, and it'll require some investigation. I'll call it for today and
 pick back up tomorrow!
+
+Just picked back up. It's complaining that a stack with id "lambda-function"
+doesn't exist. Looks like I forgot to clean something up somewhere. Let's take a
+look!
+
+Ah! The stack creation failed, so the expected stack was never created. Gotcha.
+It says "Parameter values specified for a template which does not require them."
+Maybe my copy-paste was a bit overzealous? Let's take a look at the template for
+the Lambda function and accompanying pieces.
+
+Yup! Overzealous copy-paste. I was passing a "parameters" flag when creating the
+stack, and the template does not contain a "Parameters" section for receiving
+them! I just commented out that line. Let's try again!
