@@ -89,5 +89,5 @@ Outputs:
   WebsiteBucketArn:
     Value: !GettAtt S3Bucket.Arn
     Export:
-      Name: "WebsiteBucketArn"
-    Description: "ARN of the S3 bucket containing the website's files"
+      Name: 'WebsiteBucketArn'
+    Description: "ARN of the S3 bucket containing the website files"

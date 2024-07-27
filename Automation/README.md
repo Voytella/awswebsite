@@ -158,3 +158,6 @@ triggering? Ahhh! Perhaps because it doesn't look like any trigger's been
 configured! We've gotta do that separately, I guess. Cool, let's figure it out!
 
 Alright, I added in a bunch of stuff ChatGPT suggested. Let's see if this works!
+
+Just dealing with some formatting issues. I'm working through validating the
+template.
