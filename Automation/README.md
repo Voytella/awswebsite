@@ -138,3 +138,6 @@ the Lambda function and accompanying pieces.
 Yup! Overzealous copy-paste. I was passing a "parameters" flag when creating the
 stack, and the template does not contain a "Parameters" section for receiving
 them! I just commented out that line. Let's try again!
+
+I guess just commenting it out broke the flow of the command. Lemme just
+straight up remove it.
