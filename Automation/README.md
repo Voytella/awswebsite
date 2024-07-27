@@ -141,3 +141,6 @@ them! I just commented out that line. Let's try again!
 
 I guess just commenting it out broke the flow of the command. Lemme just
 straight up remove it.
+
+Next is an error when trying to spin up the Lambda stack. I forgot the "www".
+Let's try again.
