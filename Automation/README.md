@@ -151,3 +151,10 @@ doesn't exist. Which is true! How come the logs aren't showing up? (I need the
 logs to figure out why it's not updating when I upload an image, lol!) I also
 need to initialize the thing with a 'data/image.png' file or something to make
 sure the proper directory is created first thing.
+
+They said logs won't exist until it runs and makes some, which makes sense.
+Unfortunately, it's not running when I upload a new file! Why's it not
+triggering? Ahhh! Perhaps because it doesn't look like any trigger's been
+configured! We've gotta do that separately, I guess. Cool, let's figure it out!
+
+Alright, I added in a bunch of stuff ChatGPT suggested. Let's see if this works!

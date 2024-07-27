@@ -57,6 +57,7 @@ echo "files uploaded"
 # create lambda stack
 aws cloudformation create-stack --region ${region} \
 --stack-name ${lambda_stack_name} --template-body file://lambda-function.yaml \
+--parameters ParameterKey=WebsiteBucketName,ParameterValue=${bucket_name} \
 --capabilities CAPABILITY_NAMED_IAM
 
 watch_stack_creation "$lambda_stack_name"

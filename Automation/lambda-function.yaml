@@ -1,5 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Create a Lambda Function from already uploaded code.
+Parameters:
+  WebsiteBucketName:
+    Type: String
+    Default: www.autodeploytest.link
+
 Resources:
 
 # AWS Role that will execute the website updating code.
@@ -25,6 +30,10 @@ Resources:
                   - 'logs:CreateLogStream'
                   - 'logs:PutLogEvents'
                 Resource: 'arn:aws:logs:*:*:*'
+              - Effect: 'Allow'
+                Action:
+                  - 's3:GetObject'
+                Resource: !ImportValue WebsiteBucketArn
 
   # AWS Lambda function that will use the Lambda execution role to execute the
   # website updating code.
@@ -40,6 +49,43 @@ Resources:
       Runtime: 'python3.10'
       MemorySize: 128
       Timeout: 3
+
+  # S3 Event Notification to Lambda Function
+  S3EventNotification:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref WebsiteBucketName
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service: 'lambda.amazonaws.com'
+            Action: 's3.GetObject'
+            Resource: !ImportValue WebsiteBucketArn
+
+  # Add the S3 Event Notification to the Lambda Function
+  S3EventTrigger:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !GetAtt UpdateWebsiteLambda.Arn
+      Action: 'lambda:InvokeFunction'
+      Principal: 's3.amazonaws.com'
+      SourceArn: !ImportValue WebsiteBucketArn
+
+  # Configure the S3 Event
+  S3EventConfiguration:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: 's3:ObjectCreated:*'
+            Function: !GetAtt UpdateWebsiteLambda.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: 'ROOT_DIR'
+                    Value: 'data/'
 
 Outputs:
   UpdateWebsiteLambdaArn:
