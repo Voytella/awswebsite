@@ -84,7 +84,7 @@ Resources:
             Filter:
               S3Key:
                 Rules:
-                  - Name: 'ROOT_DIR'
+                  - Name: 'prefix'
                     Value: 'data/'
 
 Outputs:

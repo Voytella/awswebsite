@@ -161,3 +161,6 @@ Alright, I added in a bunch of stuff ChatGPT suggested. Let's see if this works!
 
 Just dealing with some formatting issues. I'm working through validating the
 template.
+
+Fixed the formatting! Looks like it's particular about the filters for the S3
+Event Configuration. I'll make sure it's named "prefix".
