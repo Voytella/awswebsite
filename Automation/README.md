@@ -164,3 +164,8 @@ template.
 
 Fixed the formatting! Looks like it's particular about the filters for the S3
 Event Configuration. I'll make sure it's named "prefix".
+
+Now it doesn't like something about a handler. Let's investigate that.
+
+Something in the Lambda template is invalid. I'm just gonna comment out the new
+requests one at a time and go down the list.
