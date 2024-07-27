@@ -169,3 +169,10 @@ Now it doesn't like something about a handler. Let's investigate that.
 
 Something in the Lambda template is invalid. I'm just gonna comment out the new
 requests one at a time and go down the list.
+
+Lol, what I meant was comment them all out, verify the old stuff still works,
+then uncomment them one at a time! The S3EventNotification seems to be stuck on
+creation, it's been there for a few minutes.
+
+Yeah, it's just busted. I found in the Bucket configuration in the GUI where the
+Event Notifications are configured, though. 

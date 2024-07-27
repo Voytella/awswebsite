@@ -73,19 +73,19 @@ Resources:
   #    Principal: 's3.amazonaws.com'
   #    SourceArn: !ImportValue WebsiteBucketArn
 
-  ## Configure the S3 Event
-  #S3EventConfiguration:
-  #  Type: 'AWS::S3::Bucket'
-  #  Properties:
-  #    NotificationConfiguration:
-  #      LambdaConfigurations:
-  #        - Event: 's3:ObjectCreated:*'
-  #          Function: !GetAtt UpdateWebsiteLambda.Arn
-  #          Filter:
-  #            S3Key:
-  #              Rules:
-  #                - Name: 'prefix'
-  #                  Value: 'data/'
+  # Configure the S3 Event
+  S3EventConfiguration:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: 's3:ObjectCreated:*'
+            Function: !GetAtt UpdateWebsiteLambda.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: 'prefix'
+                    Value: 'data/'
 
 #Outputs:
 #  UpdateWebsiteLambdaArn:
