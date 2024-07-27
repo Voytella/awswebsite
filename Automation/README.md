@@ -144,3 +144,10 @@ straight up remove it.
 
 Next is an error when trying to spin up the Lambda stack. I forgot the "www".
 Let's try again.
+
+It made the website and lambda stacks, but it's behaving strangely. When I try
+to look at the logs, is complains that the log group for the new Lambda function
+doesn't exist. Which is true! How come the logs aren't showing up? (I need the
+logs to figure out why it's not updating when I upload an image, lol!) I also
+need to initialize the thing with a 'data/image.png' file or something to make
+sure the proper directory is created first thing.
