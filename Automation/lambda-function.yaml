@@ -65,7 +65,7 @@ Resources:
             Resource: !ImportValue WebsiteBucketArn
           - Effect: 'Allow'
             Principal:
-              "AWS": !Ref LambdaExecusionRole.Arn
+              "AWS": !GetAtt LambdaExecusionRole.Arn
             Action: "s3:*"
             Resource: !ImportValue WebsiteBucketArn
 
