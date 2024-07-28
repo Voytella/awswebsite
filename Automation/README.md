@@ -176,3 +176,6 @@ creation, it's been there for a few minutes.
 
 Yeah, it's just busted. I found in the Bucket configuration in the GUI where the
 Event Notifications are configured, though. 
+
+Nope, still busted! Let's try the route of getting a YAML export of our
+existing, working configuration.

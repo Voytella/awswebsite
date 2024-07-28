@@ -66,7 +66,7 @@ Resources:
           - Effect: 'Allow'
             Principal:
               "AWS": !GetAtt LambdaExecutionRole.Arn
-            Action: "s3:*"
+            Action: "s3.GetObject"
             Resource: !ImportValue WebsiteBucketArn
 
   # Add the S3 Event Notification to the Lambda Function
