@@ -50,8 +50,8 @@ Resources:
       MemorySize: 128
       Timeout: 3
 
-  # S3 Event Notification to Lambda Function
-  S3EventNotification:
+  # S3 Bucket Configuration
+  S3BucketConfiguration:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
       Bucket: !Ref WebsiteBucketName
@@ -63,15 +63,20 @@ Resources:
               Service: 'lambda.amazonaws.com'
             Action: 's3.GetObject'
             Resource: !ImportValue WebsiteBucketArn
+          - Effect: 'Allow'
+            Principal:
+              "AWS": !Ref LambdaExecusionRole.Arn
+            Action: "s3:*"
+            Resource: !ImportValue WebsiteBucketArn
 
-  ## Add the S3 Event Notification to the Lambda Function
-  #S3EventTrigger:
-  #  Type: 'AWS::Lambda::Permission'
-  #  Properties:
-  #    FunctionName: !GetAtt UpdateWebsiteLambda.Arn
-  #    Action: 'lambda:InvokeFunction'
-  #    Principal: 's3.amazonaws.com'
-  #    SourceArn: !ImportValue WebsiteBucketArn
+  # Add the S3 Event Notification to the Lambda Function
+  S3EventTrigger:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !GetAtt UpdateWebsiteLambda.Arn
+      Action: 'lambda:InvokeFunction'
+      Principal: 's3.amazonaws.com'
+      SourceArn: !ImportValue WebsiteBucketArn
 
   # Configure the S3 Event
   S3EventConfiguration:
@@ -87,7 +92,7 @@ Resources:
                   - Name: 'prefix'
                     Value: 'data/'
 
-#Outputs:
-#  UpdateWebsiteLambdaArn:
-#    Value: !GetAtt UpdateWebsiteLambda.Arn
-#    Description: "ARN of the Lambda Function"
+Outputs:
+  UpdateWebsiteLambdaArn:
+    Value: !GetAtt UpdateWebsiteLambda.Arn
+    Description: "ARN of the Lambda Function"
