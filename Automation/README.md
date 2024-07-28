@@ -179,3 +179,7 @@ Event Notifications are configured, though.
 
 Nope, still busted! Let's try the route of getting a YAML export of our
 existing, working configuration.
+
+It's complaining on the "S3EventConfiguration" that the Bucket already exists in
+the other stack, which is true. I'm just trying to modify the existing Bucket
+rather than create a new one. 

@@ -80,9 +80,10 @@ Resources:
 
   # Configure the S3 Event
   S3EventConfiguration:
-    Type: 'AWS::S3::Bucket'
+    Type: 'Custom::S3BucketNotification'
     Properties:
-      BucketName: !Ref WebsiteBucketName
+      ServiceToken: !GetAtt CustomS3BucketNotificationFunction.Arn
+      BucketName: !ImportValue WebsiteBucketName
       NotificationConfiguration:
         LambdaConfigurations:
           - Event: 's3:ObjectCreated:*'
@@ -92,6 +93,37 @@ Resources:
                 Rules:
                   - Name: 'prefix'
                     Value: 'data/'
+
+  CustomS3BucketNotificationFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        ZipFile: |
+          import boto3
+          import cfnresponse
+          def handler(event, context):
+            s3 = boto3.client('s3')
+            bucket_name = event['ResourceProperties']['BucketName']
+            notification_configuration = event['ResourceProperties']['NotificationConfiguration'] 
+            try:
+              if event['RequestType'] == 'Create' or event['RequestType'] == 'Update':
+                s3.put_bucket_notification_configuration(
+                  Bucket=bucket_name,
+                  NotificationConfiguration=notification_configuration
+                )
+              elif event['RequestType'] == 'Delete':
+                s3.put_bucket-notification_configuration(
+                  Bucket=bucket_name,
+                  NotificationConfiguration={}
+                )
+              cfnresponse.send(event, context, cfnresponse.SUCCESS, {})
+            except Exception as e:
+              cfnresponse.send(event, context, cfnresponse.FAILED, {'error': str(e)})
+      Runtime: 'python3.8'
+      MemorySize: 128
+      Timeout: 30
 
 Outputs:
   UpdateWebsiteLambdaArn:

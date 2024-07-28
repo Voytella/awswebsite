@@ -91,3 +91,8 @@ Outputs:
     Export:
       Name: 'WebsiteBucketArn'
     Description: "ARN of the S3 bucket containing the website files"
+  WebsiteBucketName:
+    Value: !Ref S3Bucket
+    Export:
+      Name: WebsiteBucketName
+    Description: "The name of the website bucket"
